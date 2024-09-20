@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles3.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>clean-city-connect</title>
+</head>
+<body>
+
+    <h2>welcome to your ward and connect to clean city</h2>
+    <P>hi, you can see the daily updates of your ward,
+       you a raise a compliant,you can give the feedback,
+       you can see the recycling centers near by and prices of recycling items,
+    </P>
+    <div class="container">
+    <div id="loginForm"></div>
+    <div id="updates"></div>
+    <div id="message"></div>
+    <div id="complaintsContainer"></div>
+    <div class="complaint-box">
+        <h3>Raise a Complaint</h3>
+        <form id="submitForm">
+            <label for="complaintText">Complaint:</label><br>
+            <textarea id="complaintText" name="complaintText" rows="4" cols="50"></textarea><br>
+            <button type="submit">Submit Complaint</button>
+        </form>
+    </div>
+    <div class="feedback-box">
+        <h3>Give Feedback</h3>
+        <form id="feedbackForm">
+            <label for="feedbackText">Feedback:</label><br>
+            <textarea id="feedbackText" name="feedbackText" rows="4" cols="50"></textarea><br>
+            <button type="submit">Submit Feedback</button>
+        </form>
+    </div>
+</div>
+
+<div class="recycling-map-container">
+    <h3 class="recycling-map-title">Recycling  Centers <span class="eco-icon">♻️</span></h3>
+    <div id="wardMap"></div>
+    <div class="recycling-centers-list">
+        <div class="recycling-center">
+            <h4>recycling center 1</h4>
+            <p>Eco friend, Open Mon-Sat 9AM-5PM</p>
+        </div>
+        <div class="recycling-center">
+            <h4>recycling center 2</h4>
+            <p>Green world, Open 24/7</p>
+        </div>
+        <div class="recycling-center">
+            <h4>recycling center 3</h4>
+            <p>Clean ward, Open Tue-Sun 8AM-6PM</p>
+        </div>
+        <div class="recycling-center">
+            <h4>recycling center 4</h4>
+            <p>Green ever, Open Tue-Sun 8AM-6PM</p>
+        </div>
+    </div>
+</div>
+<div class="con">
+    <h2>Recycling Information</h2>
+    <div class="messages">
+        <p>If you would like to recycle items that are present at home, you can take them to your nearest recycling center and sell them. For transparency, here are the  prices for recycling items:</p>
+    </div>
+
+    <table>
+        <caption>Cost of Recycling Items (Approximate)</caption>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Weight per Item (approx.)</th>
+                <th>Cost per Kg (approx.)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Plastic Bottles</td>
+                <td>1 kg</td>
+                <td>₹60</td>
+            </tr>
+            <tr>
+                <td>Aluminum Cans</td>
+                <td>1 kg</td>
+                <td> ₹70</td>
+            </tr>
+            <tr>
+                <td>Glass Bottles</td>
+                <td>1 kg</td> 
+                <td>₹100</td>
+            </tr>
+            <tr>
+                <td>Cardboard Boxes</td>
+                <td>1 kg</td>
+                <td>₹30</td>
+            </tr>
+            <tr>
+                <td>Newspapers</td>
+                <td>1 kg</td>
+                <td>₹30</td>
+            </tr>
+            <tr>
+                <td>Magazines</td>
+                <td>1 kg</td>
+                <td>₹50</td>
+            </tr>
+            <tr>
+                <td>Cooking Oil Bottles</td>
+                <td>1 kg</td>
+                <td>₹20</td>
+            </tr>
+            <tr>
+                <td>Electronic Waste such as (phones,laptops etc).</td>
+                <td>depends on the brand of the items</td>
+                <td> min is ₹1000 to max is ₹100000 (depends on item)</td>
+            </tr>
+            <tr>
+                <td>Milk and Juice Containers </td>
+                <td>1 kg</td>
+                <td>₹50</td>
+            </tr>
+            <tr>
+                <td>Empty Paint Cans</td>
+                <td>1 kg</td>
+                <td>₹40</td>
+            </tr>
+        </tbody>
+    </table>
+    <p>For more  details, please visit your nearest recycling center(any recycling center same cost).</p>
+
+</div>
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', () => {
+        const updatesContainer = document.getElementById('updates');
+        const messageElement = document.getElementById('message');
+        const wardMapElement = document.getElementById('wardMap');
+        // Get wardNumber from URL params
+        const urlParams = new URLSearchParams(window.location.search);
+        const wardNumber = urlParams.get('wardNumber');
+
+        if (wardNumber) {
+            fetchWardUpdates(wardNumber);
+            displayWardMap(wardNumber);
+        } else {
+            messageElement.textContent = 'Ward number not provided';
+        }
+
+        async function fetchWardUpdates(wardNumber) {
+    try {
+        console.log(`Fetching updates for ward ${wardNumber}`);
+        const response = await fetch(`http://localhost:3002/api/ward-updates?wardNumber=${wardNumber}`);
+        const updates = await response.json();
+        console.log('Received updates:', updates);
+
+        if (response.status === 200) {
+            updatesContainer.innerHTML = '<h3>Ward Daily Updates</h3>';
+            if (updates.length === 0) {
+                updatesContainer.innerHTML += '<p>No updates available for this ward.</p>';
+            } else {
+                updates.forEach(update => {
+                    const updateDiv = document.createElement('div');
+                    updateDiv.innerHTML = `
+                        <p>Date: ${new Date(update.date).toLocaleDateString()}</p>
+                        ${update.rainyDay ? 
+                            '<p><strong>It is a rainy day. Please collect your garbage and keep it in one place. Wait for tomorrow. Have a good day!</strong></p>' :
+                            `<p>Workers Arrived: ${update.workersArrived ? 'Yes' : 'No'}</p>
+                            <p>Garbage Collected: ${update.garbageCollected ? 'Yes' : 'No'}</p>
+                            <p>Garbage Left: ${update.garbageLeft ? 'Yes' : 'No'}</p>`
+                        }
+                        <hr>
+                    `;
+                    updatesContainer.appendChild(updateDiv);
+                });
+            }
+        } else {
+            messageElement.textContent = updates.message || 'Error fetching updates';
+        }
+    } catch (error) {
+        console.error('Error fetching updates:', error);
+        messageElement.textContent = 'Error fetching updates: ' + error.message;
+    }
+}
+
+function displayWardMap(wardNumber) 
+{
+    const mapImage = document.createElement('img');
+    mapImage.src = `/images/ward${wardNumber}_map.png`;
+    mapImage.alt = `Ward ${wardNumber} Map`;
+    mapImage.style.maxWidth = '100%';
+    wardMapElement.innerHTML = '';
+    wardMapElement.appendChild(mapImage);
+}
+  });
+
+  document.addEventListener('DOMContentLoaded', async () => {
+        const submitForm = document.getElementById('submitForm');
+        const messageElement = document.getElementById('message');
+        const complaintsContainer = document.getElementById('complaintsContainer');
+
+        // Get wardNumber from URL params
+        const urlParams = new URLSearchParams(window.location.search);
+        const wardNumber = urlParams.get('wardNumber');
+
+        if (!wardNumber) {
+            displayMessage('Error: Ward number not specified in URL', true);
+            return;
+        }
+
+        // Function to submit a complaint
+        if (submitForm) {
+            submitForm.addEventListener('submit', async (event) => {
+                event.preventDefault();
+
+                const complaintTextElement = document.getElementById('complaintText');
+                if (!complaintTextElement) {
+                    console.error('Element with id "complaintText" not found.');
+                    return;
+                }
+
+                const complaintText = complaintTextElement.value;
+
+                try {
+                    const response = await fetch(`http://localhost:3002/api/submit-complaint`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ wardNumber, complaintText })
+                    });
+
+                    if (response.status === 200) {
+                        const result = await response.json();
+                        console.log('Complaint submitted successfully:', result);
+                        displayMessage('Complaint submitted successfully', false);
+                        complaintTextElement.value = ''; // Clear the textarea
+                        fetchComplaints(); // Refresh the complaints list
+                    } else {
+                        const result = await response.json();
+                        console.error('Error submitting complaint:', result.message);
+                        displayMessage('Error: ' + result.message, true);
+                    }
+                } catch (error) {
+                    console.error('Error submitting complaint:', error);
+                    displayMessage('Error: ' + error.message, true);
+                }
+            });
+        } else {
+            console.error('Element with id "submitForm" not found.');
+        }
+
+        // Function to display messages
+        function displayMessage(message, isError) {
+            messageElement.textContent = message;
+            messageElement.style.display = 'block';
+            messageElement.className = isError ? 'error' : 'success';
+
+            // Hide the message after 5 seconds
+            setTimeout(() => {
+                messageElement.style.display = 'none';
+            }, 5000);
+        }
+
+     async function fetchComplaints() {
+    try {
+        const response = await fetch(`http://localhost:3002/api/ward-complaints/${wardNumber}`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const complaints = await response.json();
+
+        complaintsContainer.innerHTML = ''; // Clear existing complaints
+        if (complaints.length === 0) {
+            complaintsContainer.innerHTML = '<p>No complaints found for this ward.</p>';
+        } else {
+            complaints.forEach(complaint => {
+                const complaintDiv = document.createElement('div');
+                complaintDiv.className = 'complaint';
+                complaintDiv.innerHTML = `
+                    <p><strong>Date:</strong> ${new Date(complaint.date).toLocaleDateString()}</p>
+                    <p><strong>Complaint:</strong> ${complaint.complaintText}</p>
+                    ${complaint.response ? 
+                        `<div class="response">
+                            <p><strong>Response:</strong> ${complaint.response.text}</p>
+                            <p><strong>Response Date:</strong> ${new Date(complaint.response.date).toLocaleDateString()}</p>
+                         </div>` 
+                        : '<p>No response yet</p>'}
+                `;
+                complaintsContainer.appendChild(complaintDiv);
+            });
+        }
+    } catch (error) {
+        console.error('Error fetching complaints:', error);
+        complaintsContainer.innerHTML = `<p>Error fetching complaints: ${error.message}</p>`;
+    }
+}
+ // Fetch complaints when the page loads
+ fetchComplaints();
+ });
+
+      
+document.addEventListener('DOMContentLoaded', () => {
+    const feedbackForm = document.getElementById('feedbackForm');
+    const messageElement = document.getElementById('message');
+
+    if (feedbackForm) {
+        feedbackForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const feedbackTextElement = document.getElementById('feedbackText');
+            if (!feedbackTextElement) {
+                console.error('Element with id "feedbackText" not found.');
+                return;
+            }
+
+            const feedbackText = feedbackTextElement.value;
+
+            // Get wardNumber from URL params
+            const urlParams = new URLSearchParams(window.location.search);
+            const wardNumber = urlParams.get('wardNumber');
+
+            if (!wardNumber) {
+                console.error('Ward number not found in URL params.');
+                return;
+            }
+
+            try {
+                const response = await fetch(`http://localhost:3002/api/submit-feedback`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ wardNumber, feedbackText })
+                });
+
+                if (response.status === 200) {
+                    const result = await response.json();
+                    console.log('Feedback submitted successfully:', result);
+                    displayMessage('Feedback submitted successfully', false);
+                    complaintTextElement.value = ''; // Clear the textarea
+                } else {
+                    const result = await response.json();
+                    console.error('Error submitting feedback:', result.message);
+                    displayMessage('Error: ' + result.message, true);
+
+                }
+            } catch (error) {
+                console.error('Error submitting feedback:', error);
+                displayMessage('Error: ' + result.message, true);
+
+            }
+        });
+    } else {
+        console.error('Element with id "feedbackForm" not found.');
+    }
+    function displayMessage(message, isError) {
+        messageElement.textContent = message;
+        messageElement.style.display = 'block';
+        messageElement.className = isError ? 'error' : 'success';
+
+        // Hide the message after 5 seconds
+        setTimeout(() => {
+            messageElement.style.display = 'none';
+        }, 5000);
+    }
+});
+
+
+    </script>
+</body>
+</html>

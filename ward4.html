@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="ward.css">
+    <title>J.P.Nagar Daily Update</title>
+</head>
+<body>
+    <div class="container">
+    <h2>Ward 4 Daily Update
+        "JP Nagar"
+    </h2>
+    <div id="complaints"></div>
+    <div id="complaintsContainer">
+        <h3>Ward compliants</h3>
+    </div>
+    <div id="feedbackContainer">
+        <h3>Ward Feedback</h3>
+    </div>
+    <form id="daily-update-form">
+        <h2>daily-update-form</h2>
+        <label>
+            Workers Arrived:
+            <input type="checkbox" id="workers-arrived" name="workersArrived">
+        </label><br>
+        <label>
+            Garbage Collected:
+            <input type="checkbox" id="garbage-collected" name="garbageCollected">
+        </label><br>
+        <label>
+            Garbage Left:
+            <input type="checkbox" id="garbage-left" name="garbageLeft">
+        </label><br>
+        <label>
+            Rainy Day:
+            <input type="checkbox" id="rainy-day" name="rainyDay">
+        </label><br>
+        <input type="hidden" id="wardmailID" value="jpnagar1@gmail.com"> <!-- Hidden field for wardmailID -->
+        <button type="submit">Submit</button>
+    </form>
+    <div id="message"></div>
+    <div id="penalties-container" class="penalty">
+        <h3>Penalties</h3>
+    </div>
+    <div id="rating"></div>
+    <div id="average-rating"></div>
+    </div>
+
+    <script>
+        document.getElementById('daily-update-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const wardmailID = document.getElementById('wardmailID').value;
+            const workersArrived = document.getElementById('workers-arrived').checked;
+            const garbageCollected = document.getElementById('garbage-collected').checked;
+            const garbageLeft = document.getElementById('garbage-left').checked;
+            const rainyDay = document.getElementById('rainy-day').checked;
+
+            if (rainyDay) {
+                document.getElementById('workers-arrived').disabled = true;
+                document.getElementById('garbage-collected').disabled = true;
+                document.getElementById('garbage-left').disabled = true;
+            }
+
+
+            const response = await fetch('http://localhost:3001/api/daily-update', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ wardmailID,wardNumber: '4', workersArrived, garbageCollected, garbageLeft, rainyDay})
+            });
+
+            const result = await response.json();
+            document.getElementById('message').textContent = result.m2;
+            if (result.rating !== undefined) {
+                document.getElementById('rating').textContent = `Rating: ${result.rating} stars`;
+            }
+            if (result.averageRating !== undefined) {
+                document.getElementById('average-rating').textContent = `Average Rating: ${result.averageRating.toFixed(2)} stars`;
+            }
+        });
+
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const wardNumber = '4';
+            try {
+                const response = await fetch(`http://localhost:3001/api/ward-complaints/${wardNumber}`);
+                const complaints = await response.json();
+
+                const complaintsContainer = document.getElementById('complaintsContainer');
+                complaints.forEach(complaint => {
+                    const complaintDiv = document.createElement('div');
+                    complaintDiv.innerHTML = `
+                        <p>${new Date(complaint.date).toLocaleDateString()}: ${complaint.complaintText}</p>
+                        ${complaint.response ? `<p>Response: ${complaint.response.text}</p>` : ''}
+                        <textarea id="response-${complaint._id}"></textarea>
+                        <button onclick="submitResponse('${complaint._id}')">Submit Response</button>
+                    `;
+                    complaintsContainer.appendChild(complaintDiv);
+                });
+            } catch (error) {
+                console.error('Error fetching complaints:', error);
+            }
+    
+// Fetch feedback
+try {
+                const response = await fetch(`http://localhost:3001/api/ward-feedback/${wardNumber}`);
+                const feedbackList = await response.json();
+
+                const feedbackContainer = document.getElementById('feedbackContainer');
+                feedbackList.forEach(feedback => {
+                    const feedbackDiv = document.createElement('div');
+                    feedbackDiv.textContent = `${new Date(feedback.date).toLocaleString()}: ${feedback.feedbackText}`;
+                    feedbackContainer.appendChild(feedbackDiv);
+                });
+            } catch (error) {
+                console.error('Error fetching feedback:', error);
+            }
+
+
+
+            // Fetch penalties
+            try {
+                const response = await fetch(`http://localhost:3001/api/ward-penalties/${wardNumber}`);
+                const penalties = await response.json();
+                console.log('Penalties:', penalties); // Log the response to check the format
+
+                const penaltiesContainer = document.getElementById('penalties-container');
+                let penaltyText = '';
+                
+                penalties.forEach(penalty => {
+                    penaltyText += `${penalty.reason}: ₹${penalty.amount}<br>`;
+                });
+                
+                if (penaltyText) {
+                    penaltiesContainer.innerHTML = `<h3>Penalties:</h3>${penaltyText}`;
+                }
+            } catch (error) {
+                console.error('Error fetching penalties:', error);
+            }
+        });
+
+
+
+        async function submitResponse(complaintId) {
+            const responseText = document.getElementById(`response-${complaintId}`).value;
+            try {
+                const response = await fetch('http://localhost:3001/api/submit-response', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ complaintId, responseText })
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    alert(result.message);
+                    location.reload(); // Refresh the page to show the new response
+                } else {
+                    const error = await response.json();
+                    alert('Error submitting response');
+                }
+            } catch (error) {
+                console.error('Error submitting response:', error);
+                alert('Error submitting response');
+            }
+        }
+
+    </script>
+</body>
+</html>

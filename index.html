@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Waste Management System</title>
+    <link rel="stylesheet" href="main1.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <h2 class="logo">Clean-City-Connect</h2>
+        <nav class="nagivation">
+            <a href="#home">Home</a>
+
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section id="home">
+        <div class="content-wrapper">
+        <h2>Welcome to Clean-City-Connect</h2>
+            <p>Our mission is to make Bangalore a cleaner and greener city join us in our efforts to manage waste effectively.
+            With over 200 wards, we aim to manage waste efficiently and keep our city clean.
+            Our platform connects government officials, ward members, and residents to ensure effective waste management.
+            Through this platform, we aim to create a more organized and responsive waste 
+            management system that not only improves the cleanliness and hygiene of 
+            Bangalore neighborhoods but also fosters a collaborative environment where 
+            residents and ward members can work together towards a cleaner city and create a sustainable environment for future generations.</p>
+            
+            </div>
+    </section>
+    
+
+    <section id="about">
+        <div class="content-wrapper">
+            <h2>About Clean-City-Connect</h2>
+            <p>Clean-City-Connect is an initiative to improve waste management in Bangalore's 200 wards.
+            Our platform facilitates communication between government officials, ward members, and residents.
+            We aim to ensure cleanliness, efficient waste collection, and proper disposal of waste across all wards.
+            By providing a transparent system for monitoring and reporting, we strive to enhance accountability and service quality.
+            Join us in our mission to create a cleaner, healthier Bangalore for everyone.</p>
+        </div>
+        <div class="ward-details">
+            <p>Ward Number: 1</p>
+            <p>Ward Name: Malleswaram</p>
+            <p>Ward Email: malleswaram1@gmail.com</p>   
+        </div>
+        <div class="ward-details">
+            <p>Ward Number: 2</p>
+            <p>Ward Name: Hebbala</p>
+            <p>Ward Email: hebbala1@gmail.com</p>
+        </div>
+        <div class="ward-details">
+            <p>Ward Number: 3</p>
+            <p>Ward Name: K.R.Puram</p>
+            <p>Ward Email: krpuram1@gmail.com</p>
+        </div>
+        <div class="ward-details">
+            <p>Ward Number: 4</p>
+            <p>Ward Name:J.P.Nagar</p>
+            <p>Ward Email: jpnagar1@gmail.com</p>
+        </div>
+        <div class="ward-details">
+            <p>Ward Number: 5</p>
+            <p>Ward Name:Halasuru</p>
+            <p>Ward Email: halasuru1@gmail.com</p>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="content-wrapper">
+            <h2>Our Services</h2>
+            <p>
+                To address these current issues, we propose the development of a web-based 
+    solution designed to enhance the transparency, accountability of waste 
+    management services in Bangalore. This platform aims to facilitate better 
+    communication and reporting mechanisms between ward members responsible 
+    for waste management and the residents they serve. By leveraging technology, 
+    we can ensure that waste collection, complaints are addressed promptly. 
+            </p>
+            <p>
+                If you are a ward member, please login using your ward email ID and password. 
+                If you are a resident, please login using your email ID and password. 
+                If you don't have an account, please proceed with registration. 
+                Please note, government login is restricted to government officials only.
+                </p>
+                </div>
+    </section>
+
+    <div class="content">
+        <div class="loading-bar"></div>
+    <div class="wrapper">
+         <!-- Resident Login -->
+         <span class="icon-close"><ion-icon name="close-outline"></ion-icon>
+        </span>
+           <div class="form-box login">
+            <h2>Resident Login</h2>
+            <div id="message"></div>
+            <form id="resident-login-form" action='/api/login' method="POST">
+            <form action="#">
+              <div class="input-box">
+                <span class="icon"><ion-icon 
+                    name="mail"></ion-icon></span>
+                <input type="email" id="emailID" required>
+                <label>E-mail</label>
+            </div>
+            <div class="input-box">
+                <span class="icon"><ion-icon name="calendar-number-sharp"></ion-icon>
+                </span>
+                <input type="Number"  id="wardNumber" required>
+                <label>ward Number</label>
+            </div>
+            <div class="input-box">
+                <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                <input type="password" id="resipassword" required>
+                <label>Password</label>
+            </div>
+            <div class="remember-forgot">
+                <a href = "#">Forgot Password?</a>
+            </div>
+            <button type="submit" class="btn">Login</button>
+            <div id="login-message"></div>
+            <div class="login-register">
+                <p> Don't Have An Account? <a href="#" class="register-link">Register</a></p>
+            </div>
+            </form>
+            </form>
+           </div>
+
+           <div class="form-box register" id="register-form">
+            <h2> Registration</h2>
+            <form id="resident-registration-form">
+            <form action="#">
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="person-sharp"></ion-icon></span>
+                    <input type="text" id="username" required>
+                    <label>Username</label>
+                </div>
+              <div class="input-box">
+                <span class="icon"><ion-icon 
+                    name="mail"></ion-icon></span>
+                <input type="email" id="regemailID"  required>
+                <label>E-mail</label>
+            </div>
+            <div class="input-box">
+                <span class="icon"><ion-icon name="calendar-number-sharp"></ion-icon>
+                </span>
+                <input type="Number" id="regwardNumber" required>
+                <label>ward Number</label>
+            </div>
+            <div class="input-box">
+                <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                <input type="password" id="regresipassword"  required>
+                <label>Password</label>
+            </div>
+            <div class="remember-forgot">
+                <label><input type = "checkbox">I Agree To The Terms And Conditions</label> 
+            </div>
+            <button type="submit" class="btn">Register</button>
+            <div id="registration-message"></div>
+            <div class="login-register">
+                <p> Already Have An Account? <a href="#" class="login-link">Login</a></p>
+            </div>
+            </form>
+            </form>
+           </div>
+           </div>
+
+          <!--goverment login-->
+           <div class="wrapper">
+            <span class="icon-close"><ion-icon name="close-outline"></ion-icon>
+           </span>
+              <div class="form-box government">
+               <h2>government Login</h2>
+               <div id="m1"></div>
+               <form id="government-form" action='/api/login' method="POST"><!-- Add an id to the form -->
+               <form action="#">
+                 <div class="input-box">
+                   <span class="icon"><ion-icon 
+                       name="mail"></ion-icon></span>
+                   <input type="email" id="governmentID" required> <!-- Add id="governmentID" -->
+                   <label>government-mail</label>
+               </div>
+               <div class="input-box">
+                   <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                   <input type="password" id="govpassword" required> <!-- Add id="password" -->
+                   <label>Password</label>
+               </div>
+               <div class="remember-forgot">
+                   <a href = "#">Forgot Password?</a>
+               </div>
+               <button type="submit" class="btn">Login</button>
+               </form>
+               </form>
+              </div>
+              </div>
+
+             <!--ward member login-->
+              <div class="wrapper">
+                <span class="icon-close"><ion-icon name="close-outline"></ion-icon>
+               </span>
+                  <div class="form-box ward">
+                   <h2>Ward Member Login</h2>
+                   <div id="m2"></div>
+                   <div id="message"></div>
+                   <form id="ward-form" action='/api/login' method="POST"> <!-- Add an id to the form -->
+                   <form action="#">
+                     <div class="input-box">
+                       <span class="icon"><ion-icon 
+                           name="mail"></ion-icon></span>
+                       <input type="email" id="wardmailID"  required>  <!-- Add id="wardmailID" -->
+                       <label>ward-mail-id</label>
+                   </div>
+                   <div class="input-box">
+                       <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                       <input type="password" id="wardpassword" required>  <!-- Add id="password" -->
+                       <label>Password</label>
+                   </div>
+                   <div class="remember-forgot">
+                       <a href = "#">Forgot Password?</a>
+                   </div>
+                   <button type="submit" class="btn">Login</button>
+                   </form>
+                  </div>
+                  </div>
+              </div>
+    <script src="scripts.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+<script>
+
+    document.getElementById('government-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const governmentID = document.getElementById('governmentID').value;
+        const govpassword = document.getElementById('govpassword').value;
+
+        const response = await fetch('http://localhost:3000/api/login', 
+        {
+            method: 'POST',
+            headers: 
+            {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ governmentID, govpassword })
+        });
+
+        const result = await response.json();
+        if (response.status === 200) {
+            window.open('government.html', '_blank'); // Redirect to success page
+        } else {
+            document.getElementById('m1').textContent = result.m1;
+        }
+    });
+
+    document.getElementById('ward-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const wardmailID = document.getElementById('wardmailID').value;
+            const wardpassword = document.getElementById('wardpassword').value;
+            const messageDiv = document.getElementById('m2');
+
+            try {
+                const response = await fetch('http://localhost:3001/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ wardmailID, wardpassword })
+                });
+
+                const result = await response.json();
+                console.log('Login response:', result);
+
+                if (response.ok) {
+                    messageDiv.textContent = result.m2;
+                    const wardNumber = result.wardNumber;
+                    if (wardNumber) {
+                        // Redirect based on the wardNumber
+                        window.open(`ward${wardNumber}.html`, '_blank');
+                    } else {
+                        messageDiv.textContent = 'Ward number not found.';
+                    }
+                } else {
+                    messageDiv.textContent = result.m2;
+                }
+            } catch (error) {
+                console.error('Error during login:', error);
+                messageDiv.textContent = 'Error: ' + error.m2;
+            }
+        });
+
+    document.getElementById('resident-login-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const emailID = document.getElementById('emailID').value;
+    const wardNumber = document.getElementById('wardNumber').value;
+    const resipassword = document.getElementById('resipassword').value;
+
+    const response = await fetch('http://localhost:3002/api/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ emailID, wardNumber, resipassword })
+    });
+
+    const result = await response.json();
+    if (response.status === 200) {
+        // Redirect to the single HTML page with the ward number as a query parameter
+        window.open(`resident.html?wardNumber=${wardNumber}`, '_blank');
+    } else {
+        document.getElementById('message').textContent = result.message;
+    }
+});
+
+    document.getElementById('resident-registration-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const username = document.getElementById('username').value;
+        const regemailID = document.getElementById('regemailID').value;
+        const regwardNumber = document.getElementById('regwardNumber').value;
+        const regresipassword = document.getElementById('regresipassword').value;
+
+        const response = await fetch('http://localhost:3002/api/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, regemailID, regwardNumber, regresipassword })
+        });
+
+        const result = await response.json();
+        if (response.status === 200) {
+            document.getElementById('registration-message').textContent = 'Registration successful';
+            // Optionally redirect to login page or handle as needed
+        } else {
+            document.getElementById('registration-message').textContent = result.message;
+        }
+    });
+</script>
+
+<section id="contact">
+    <div class="content-wrapper">
+        <h2>Contact Us</h2>
+        <p>We'd love to hear from you! If you have any questions, suggestions, or need support, please reach out to us.</p>
+        <p><strong>Email:</strong> support@cleancityconnect.com</p>
+        <p><strong>Phone:</strong> +91-123-456-7890</p>
+        <p><strong>Address:</strong> 123, Clean City Road, Bangalore, Karnataka, India</p>
+        <p>Follow us on social media for the latest updates:</p>
+        <p><strong>Facebook:</strong> <a href="https://www.facebook.com/cleancityconnect">CleanCityConnect</a></p>
+        <p><strong>Twitter:</strong> <a href="https://twitter.com/cleancityconnect">@CleanCityConnect</a></p>
+        <p><strong>Instagram:</strong> <a href="https://www.instagram.com/cleancityconnect">@CleanCityConnect</a></p>
+    </div>
+</section>
+</body>
+</html>

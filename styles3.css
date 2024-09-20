@@ -1,0 +1,565 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(135deg, #c3e8ff, #f0f0f0);
+    padding: 20px;
+    min-height: 100vh;
+}
+
+/* Container */
+.container {
+    max-width: 800px;
+    margin: 0 auto 40px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Headers */
+h2, h3 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+h2 {
+    font-size: 36px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+h2::after {
+    content: '';
+    display: block;
+    width: 1500px;
+    height: 4px;
+    background: linear-gradient(90deg, #3498db, #2ecc71);
+    margin: 15px auto 0;
+    border-radius: 2px;
+}
+p{
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    
+}
+h3 {
+    font-size: 28px;
+    color: #34495e;
+}
+
+/* Updates container */
+#updates {
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 40px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+#updates div {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+#updates div:hover {
+    transform: translateY(-3px);
+}
+
+#updates p {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+#updates hr {
+    border: none;
+    border-top: 2px dashed #bdc3c7;
+    margin: 15px 0;
+}
+
+/* Forms */
+.complaint-box, .feedback-box {
+    background: linear-gradient(135deg, #e1f5fe, #b3e5fc);
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 40px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #2c3e50;
+    font-size: 18px;
+}
+
+textarea {
+    width: 100%;
+    max-width: 400px;
+    padding: 15px;
+    border: 2px solid #bdc3c7;
+    border-radius: 10px;
+    resize: vertical;
+    font-family: inherit;
+    margin-bottom: 20px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+}
+
+button {
+    background: linear-gradient(90deg, #3498db, #2980b9);
+    color: #fff;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+    background: linear-gradient(90deg, #2980b9, #3498db);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Message */
+#message {
+    padding: 15px 20px;
+    border-radius: 10px;
+    margin-top: 30px;
+    display: none;
+    font-weight: 600;
+    text-align: center;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#message.success {
+    background-color: #2ecc71;
+    color: #fff;
+}
+
+#message.error {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+/* Recycling Map Styles */
+.recycling-map-container {
+    background: linear-gradient(135deg, #e0f7fa, #80deea);
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    padding: 40px;
+    margin: 60px 0;
+    transition: all 0.4s ease;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.recycling-map-container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 60%);
+    transform: rotate(30deg);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.recycling-map-container:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+}
+
+.recycling-map-title {
+    color: #006064;
+    font-size: 3em;
+    margin-bottom: 40px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 2;
+}
+
+.map-image {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.map-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.recycling-centers-list {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    position: relative;
+    z-index: 2;
+}
+
+.recycling-center {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.recycling-center:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.recycling-center h4 {
+    color: #00695c;
+    margin-bottom: 15px;
+    font-size: 1.4em;
+    font-weight: 700;
+}
+
+.recycling-center p {
+    color: #37474f;
+    font-size: 1em;
+    line-height: 1.6;
+}
+
+/* Animated eco-friendly icon */
+.eco-icon {
+    display: inline-block;
+    font-size: 2.5em;
+    color: #4caf50;
+    animation: bounce 2s infinite;
+    text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-20px); }
+    60% { transform: translateY(-10px); }
+}
+
+/* Recycling Information Styles */
+.con {
+    background: linear-gradient(135deg, #f1f8e9, #dcedc8);
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    padding: 40px;
+    margin-bottom: 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.con::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+    transform: rotate(45deg);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.con h2 {
+    font-size: 36px;
+    margin-bottom: 30px;
+    color: #33691e;
+    position: relative;
+    z-index: 2;
+}
+
+.messages p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #1b5e20;
+    position: relative;
+    z-index: 2;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 15px;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 2;
+}
+
+table th,
+table td {
+    padding: 20px;
+    text-align: left;
+    border-radius: 10px;
+}
+
+table th {
+    background: linear-gradient(90deg, #4caf50, #8bc34a);
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+table tr {
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+table tr:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+table caption {
+    font-size: 1.4em;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #33691e;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .container, .recycling-map-container, .con {
+        padding: 30px;
+    }
+
+    h2 {
+        font-size: 28px;
+    }
+
+    h3 {
+        font-size: 24px;
+    }
+
+    .recycling-map-title {
+        font-size: 2.2em;
+    }
+
+    .recycling-centers-list {
+        grid-template-columns: 1fr;
+    }
+
+    table th,
+    table td {
+        padding: 15px;
+        font-size: 14px;
+    }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container, .recycling-map-container, .con {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #3498db;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #2980b9;
+}
+
+
+
+
+#complaintsContainer {
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    padding: 24px;
+    margin-top: 32px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.complaint {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease-in-out;
+}
+
+.complaint:hover {
+    transform: translateY(-2px);
+}
+
+.complaint p {
+    margin-bottom: 12px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333;
+}
+
+.complaint p strong {
+    color: #007bff;
+    font-weight: 600;
+}
+
+.complaint .date {
+    font-size: 12px;
+    color: #6c757d;
+    text-align: right;
+    font-style: italic;
+}
+
+.complaint .complaint-text {
+    font-size: 16px;
+    color: #212529;
+    font-weight: 500;
+    border-left: 3px solid #007bff;
+    padding-left: 12px;
+    margin: 12px 0;
+}
+
+.complaint .response {
+    background-color: #e9ecef;
+    border-radius: 6px;
+    padding: 16px;
+    margin-top: 16px;
+    position: relative;
+}
+
+.complaint .response::before {
+    content: '^_^';
+    position: absolute;
+    top: -12px;
+    left: 16px;
+    font-size: 20px;
+    color: #007bff;
+}
+
+.complaint .no-response {
+    color: #dc3545;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 12px;
+    padding: 8px;
+    background-color: #f8d7da;
+    border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+    #complaintsContainer {
+        padding: 16px;
+    }
+
+    .complaint {
+        padding: 16px;
+    }
+}
+
+#complaintsContainer::-webkit-scrollbar {
+    width: 6px;
+}
+
+#complaintsContainer::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+#complaintsContainer::-webkit-scrollbar-thumb {
+    background-color: #007bff;
+    border-radius: 3px;
+}
+
+#complaintsContainer::-webkit-scrollbar-thumb:hover {
+    background-color: #0056b3;
+}
