@@ -14,7 +14,6 @@ Encourage Resident Participation:
 TECHNOLOGY USED:
 
 Use HTML, CSS, and JavaScript for a responsive and user-friendly interface.
-
 Integrate a backend using Node.js and MongoDB for data management and analytics.
 
 UNIQUE FEATURES:
