@@ -35,6 +35,6 @@ Real-time visualization of reported issues, waste collection status, and overall
 
 ## Screenshots
 
-[![App Screenshot](images/screenshot1.png)](images/screenshot.png)
-[![App Screenshot](images/screenshot2.png)](images/screenshot.png)
-[![App Screenshot](images/screenshot3.png)](images/screenshot.png)
+[![App Screenshot](images/screenshot1.png)](images/screenshot1.png)
+[![App Screenshot](images/screenshot2.png)](images/screenshot2.png)
+[![App Screenshot](images/screenshot3.png)](images/screenshot3.png)
