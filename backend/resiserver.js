@@ -1,10 +1,9 @@
-const http = require('http');
-const url = require('url');
-const { MongoClient, ObjectId} = require('mongodb');
-
+import http from 'http';
+import url from 'url';
+import { MongoClient, ObjectId } from 'mongodb';
 
 const PORT = process.env.PORT || 3002;
-const uri = 'mongodb://localhost:27017';
+const uri = 'mongodb://127.0.0.1:27017';
 let client= null;
 
 

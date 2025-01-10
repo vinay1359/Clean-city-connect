@@ -1,10 +1,9 @@
 /* eslint-disable no-undef */
-const http = require('http');
-const url = require('url');
-const { MongoClient } = require('mongodb');
-
+import http from 'http';
+import url from 'url';
+import { MongoClient } from 'mongodb';
 const PORT = process.env.PORT || 3000;
-const uri = 'mongodb://localhost:27017/government';
+const uri = 'mongodb://127.0.0.1:27017/government';
 
 // Create a server
 const server = http.createServer(async (req, res) => {

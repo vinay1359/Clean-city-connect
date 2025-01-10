@@ -1,0 +1,9 @@
+{
+    "env": {
+      "node": true
+    },
+    "plugins": ["node"],
+    "rules": {
+      "node/no-missing-require": "error"
+    }
+  }

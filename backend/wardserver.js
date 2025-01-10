@@ -1,8 +1,8 @@
-const http = require('http');
-const url = require('url');
-const fs = require('fs');
-const path = require('path');
-const { MongoClient, ObjectId } = require('mongodb');
+import http from 'http';
+import url from 'url';
+import fs from 'fs';
+import path from 'path';
+import { MongoClient, ObjectId } from 'mongodb';
 
 
 async function getClient() {
@@ -12,7 +12,7 @@ async function getClient() {
 }
 
 const PORT = process.env.PORT || 3001;
-const uri = 'mongodb://localhost:27017/ward';
+const uri = 'mongodb://127.0.0.1:27017/ward';
 
 const server = http.createServer(async(req, res) => {
     // Set CORS headers
