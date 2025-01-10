@@ -14,7 +14,10 @@ Encourage Resident Participation:
 TECHNOLOGY USED:
 
 Use HTML, CSS, and JavaScript for a responsive and user-friendly interface.
+<<<<<<< HEAD
 
+=======
+>>>>>>> 13aded12ed1df9a01f3123613fa61973ba121566
 Integrate a backend using Node.js and MongoDB for data management and analytics.
 
 UNIQUE FEATURES:
@@ -36,6 +39,12 @@ Real-time visualization of reported issues, waste collection status, and overall
 
 ## Screenshots
 
+<<<<<<< HEAD
 [![App Screenshot](images/screenshot1.png)](images/screenshot.png)
 [![App Screenshot](images/screenshot2.png)](images/screenshot.png)
 [![App Screenshot](images/screenshot3.png)](images/screenshot.png)
+=======
+[![App Screenshot](images/screenshot1.png)](images/screenshot1.png)
+[![App Screenshot](images/screenshot2.png)](images/screenshot2.png)
+[![App Screenshot](images/screenshot3.png)](images/screenshot3.png)
+>>>>>>> 13aded12ed1df9a01f3123613fa61973ba121566
