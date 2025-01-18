@@ -35,7 +35,7 @@ Clean City Connect is an innovative web-based platform designed to revolutionize
 
 - Step 1 : Visit Clean City Connect
 - Step 2 : Choose your user type
-- ###### Resident, Ward Member, Government Official
+- #### Resident, Ward Member, Government Official
 - Register/Login with appropriate credentials
 - Access features based on your user role
 ## 📱 Screenshots
